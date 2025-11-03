@@ -26,6 +26,7 @@ namespace Program
             };
 
             //1) Aggregate Operations
+            Console.WriteLine("Task - 1");
 
             var JoinTable = people.Join(
                 orders,
@@ -53,11 +54,12 @@ namespace Program
 
             Console.WriteLine();
 
-
+            Console.WriteLine("Task - 2");
             var Task2 = JoinTable.Where(j=>j.Age>30).Average(j=>j.Amount);
             Console.WriteLine("Average of Order Amount of people greater than age 30 : " + Task2 );
             Console.WriteLine();
 
+            Console.WriteLine("Task - 3");
             var Task3 = JoinTable.GroupBy(j => j.Id).Select(g => new
             {
                 Id = g.Key,
@@ -74,14 +76,16 @@ namespace Program
 
             Console.WriteLine();
 
+            Console.WriteLine("Task - 4");
             //2) Element Operators
             DateTime date = new DateTime(2025, 02, 20);
             var Task4 = JoinTable.SingleOrDefault(j=>j.Date == date);
             Console.WriteLine("Order on 20-02-2025");
             if(Task4 != null)
             Console.WriteLine($"Id : {Task4.Id}\t Amount : {Task4.Amount}");
+            Console.WriteLine();
 
-
+            Console.WriteLine("Task - 5");
             var Task5 = orders.SingleOrDefault(o => o.Amount > 150);
             if (Task5 != null)
                 Console.WriteLine($"Order Id : {Task5.OrderId}\tPerson Id : {Task5.PersonId}\tAmount : {Task5.Amount}\tDate : {Task5.OderDate}");
@@ -89,12 +93,15 @@ namespace Program
             {
                 Console.WriteLine("None of order has amount > $ 150");
             }
+            Console.WriteLine();
 
             //3) Quantifer Operator
-
+            Console.WriteLine("Task - 6");
             bool Task6 = people.All(p => orders.Any(o=>o.PersonId == p.Id));
             Console.WriteLine(Task6 == true);
+            Console.WriteLine();
 
+            Console.WriteLine("Task - 7");
             var Task7 = orders.Where(j => j.Amount > 250);
 
             if(Task7 != null)
@@ -105,7 +112,9 @@ namespace Program
             {
                 Console.WriteLine("Yes there are NO orders > $250");
             }
+            Console.WriteLine();
 
+            Console.WriteLine("Task - 8");
             //4) Collection Conversion
             var Task8 = people.Join(
                 orders,
@@ -126,7 +135,9 @@ namespace Program
                     Console.WriteLine($"\tOrder ID: {order.OrderId}, Amount: {order.Amount}, Date: {order.OderDate}");
                 }
             }
+            Console.WriteLine();
 
+            Console.WriteLine("Task - 9");
             var Task9 = people.Join(
                 orders,
                 p => p.Id,
