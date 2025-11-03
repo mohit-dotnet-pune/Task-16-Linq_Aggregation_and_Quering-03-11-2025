@@ -26,7 +26,7 @@ namespace Program
             };
 
             //1) Aggregate Operations
-            Console.WriteLine("Task - 1");
+            Console.WriteLine("Task - 1 : Total number of orders and sum of order amounts for each person");
 
             var JoinTable = people.Join(
                 orders,
@@ -54,12 +54,12 @@ namespace Program
 
             Console.WriteLine();
 
-            Console.WriteLine("Task - 2");
+            Console.WriteLine("Task - 2 : Average order amount for people older than 30");
             var Task2 = JoinTable.Where(j=>j.Age>30).Average(j=>j.Amount);
             Console.WriteLine("Average of Order Amount of people greater than age 30 : " + Task2 );
             Console.WriteLine();
 
-            Console.WriteLine("Task - 3");
+            Console.WriteLine("Task - 3 : Min, Max, Avg order amount for each person");
             var Task3 = JoinTable.GroupBy(j => j.Id).Select(g => new
             {
                 Id = g.Key,
@@ -76,7 +76,7 @@ namespace Program
 
             Console.WriteLine();
 
-            Console.WriteLine("Task - 4");
+            Console.WriteLine("Task - 4 : Find order placed on specific date (e.g. March 5, 2025)");
             //2) Element Operators
             DateTime date = new DateTime(2025, 02, 20);
             var Task4 = JoinTable.SingleOrDefault(j=>j.Date == date);
@@ -85,7 +85,7 @@ namespace Program
             Console.WriteLine($"Id : {Task4.Id}\t Amount : {Task4.Amount}");
             Console.WriteLine();
 
-            Console.WriteLine("Task - 5");
+            Console.WriteLine("Task - 5 Find first order with amount > 150");
             var Task5 = orders.SingleOrDefault(o => o.Amount > 150);
             if (Task5 != null)
                 Console.WriteLine($"Order Id : {Task5.OrderId}\tPerson Id : {Task5.PersonId}\tAmount : {Task5.Amount}\tDate : {Task5.OderDate}");
@@ -96,13 +96,13 @@ namespace Program
             Console.WriteLine();
 
             //3) Quantifer Operator
-            Console.WriteLine("Task - 6");
+            Console.WriteLine("Task - 6 : Check if all people have placed at least one order");
             bool Task6 = people.All(p => orders.Any(o=>o.PersonId == p.Id));
             Console.WriteLine(Task6 == true);
             Console.WriteLine();
 
-            Console.WriteLine("Task - 7");
-            var Task7 = orders.Where(j => j.Amount > 250);
+            Console.WriteLine("Task - 7 : Check if any order > 250");
+            var Task7 = orders.Any(j => j.Amount > 250);
 
             if(Task7 != null)
             {
@@ -114,7 +114,7 @@ namespace Program
             }
             Console.WriteLine();
 
-            Console.WriteLine("Task - 8");
+            Console.WriteLine("Task - 8 : Convert to Dictionary<string, List<Order>>");
             //4) Collection Conversion
             var Task8 = people.Join(
                 orders,
@@ -137,7 +137,7 @@ namespace Program
             }
             Console.WriteLine();
 
-            Console.WriteLine("Task - 9");
+            Console.WriteLine("Task - 9 : Number of Orders per Person");
             var Task9 = people.Join(
                 orders,
                 p => p.Id,
